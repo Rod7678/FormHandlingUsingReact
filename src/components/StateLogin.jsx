@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ESModulesEvaluator } from "vite/module-runner";
 
 export default function Login() {
   // const [enteredEmail, setEnteredEmail] = useState('');
@@ -7,6 +8,8 @@ export default function Login() {
   email: '', 
   password: ''
 });
+
+const emailIsValid = enteredValues.email !== '' && !enteredValues.email.includes('@');
 
   function handleInputChanges(identifier, value){
     setEnteredValues((prevValues)=>({
@@ -40,6 +43,10 @@ export default function Login() {
           onChange={(event)=>handleInputChanges('email', event.target.value)} 
           value={enteredValues.email}
           />
+
+          <div className="control-error">
+            {emailIsValid && <p>please enter valid email</p>}
+          </div>
         </div>
 
         <div className="control no-margin">
