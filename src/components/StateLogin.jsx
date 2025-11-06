@@ -39,6 +39,9 @@ const emailIsValid =  didEdit.email && !enteredValues.email.includes('@');
   
   function handleSubmit(event){
     event.preventDefault();
+    if(emailIsValid){
+      return;
+    }
     console.log('Submitted!');
     console.log(enteredValues)
   }
