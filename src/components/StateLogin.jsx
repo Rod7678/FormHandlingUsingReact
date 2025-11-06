@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ESModulesEvaluator } from "vite/module-runner";
+import Input from "./Input.jsx";
 
 export default function Login() {
   // const [enteredEmail, setEnteredEmail] = useState('');
@@ -14,6 +14,7 @@ export default function Login() {
 });
 
 const emailIsValid =  didEdit.email && !enteredValues.email.includes('@');
+const passwordIsValid =  didEdit.password && enteredValues.password.trim() < 6 ;
 
   function handleInputChanges(identifier, value){
     setEnteredValues((prevValues)=>({
@@ -54,31 +55,28 @@ const emailIsValid =  didEdit.email && !enteredValues.email.includes('@');
       <h2>Login</h2>
 
       <div className="control-row">
-        <div className="control no-margin">
-          <label htmlFor="email">Email</label>
-          <input 
-          id="email" 
-          type="email" 
-          name="email" 
-          onBlur={()=> handleInputBlur('email')}
-          onChange={(event)=>handleInputChanges('email', event.target.value)} 
-          value={enteredValues.email}
-          />
+        <Input 
+        label="Email"
+         id="email"
+         type="email" 
+         name="email" 
+         onBlur={()=> handleInputBlur('email')}
+         onChange={(event)=>handleInputChanges('email', event.target.value)} 
+         value={enteredValues.email}
+         error={emailIsValid && 'please enter valid email'}
+         />
 
-          <div className="control-error">
-            {emailIsValid && <p>please enter valid email</p>}
-          </div>
-        </div>
+        <Input 
+        label="Password"
+        id="password"
+        type="password" 
+        name="password"
+        onBlur={()=> handleInputBlur('password')}
+        onChange={(event)=>handleInputChanges('password', event.target.value)} 
+        value={enteredValues.password}
+        error={passwordIsValid && 'please enter valid password'}
+        />
 
-        <div className="control no-margin">
-          <label htmlFor="password">Password</label>
-          <input 
-          id="password" 
-          type="password" 
-          name="password"  
-          onChange={(event)=>handleInputChanges('password', event.target.value)} 
-          value={enteredValues.password}/>
-        </div>
       </div>
 
       <p className="form-actions">
