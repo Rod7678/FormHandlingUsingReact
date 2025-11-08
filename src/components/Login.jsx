@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import {isEmail} from "../util/validation.js";
 
 export default function Login() {
   const [emailIsValid, setEmailIsValid] = useState(false);
@@ -12,7 +13,7 @@ export default function Login() {
     const enteredEmail = email.current.value;
     const enteredPassword = password.current.value;
 
-    const emailValid = enteredEmail.includes('@');
+    const emailValid = isEmail(enteredEmail);
     if(!emailValid){
       setEmailIsValid(true);
       return;
